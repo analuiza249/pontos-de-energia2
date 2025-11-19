@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Mapa Interativo – Feira de Ciências</title>
+    <title>Mapa da Feira de Ciências</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            gap: 20px;
+            justify-content: center;
             padding: 20px;
             background: #f3f3f3;
             overflow-x: hidden;
@@ -18,6 +18,8 @@
             display: flex;
             gap: 20px;
             width: 100%;
+            max-width: 1400px;
+            flex-wrap: wrap; /* Ajusta em telas pequenas */
         }
 
         .painel {
@@ -26,17 +28,19 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
-        /* MAPA — SOMENTE O TAMANHO ALTERADO */
+        /* MAPA AJUSTADO */
         .mapa {
-            width: 1500px;   /* AUMENTADO PARA CABER TUDO */
-            height: 1000px;  /* AUMENTADO PARA AS ESTANDES DE BAIXO */
+            width: 100%;
+            max-width: 900px;
+            height: 650px;
             background: #ffffff;
             border: 2px solid black;
             border-radius: 10px;
             position: relative;
-            overflow: hidden;
+            overflow: auto;           /* ← impede que corte */
         }
 
         .inicio {
@@ -151,11 +155,14 @@
     <!-- MAPA -->
     <div class="mapa" id="mapa">
 
+        <!-- Ícone de INÍCIO -->
         <div class="inicio" id="inicio" style="left:100px; top:100px;"></div>
         <div class="inicio-label" id="inicioLabel" style="left:100px; top:100px;">Início</div>
 
+        <!-- PONTO VERMELHO -->
         <div class="ponto" id="ponto" style="left:100px; top:100px;"></div>
 
+        <!-- ESTANDES -->
         <div class="estande" id="Estande-Biologia" style="left:200px; top:150px;">
             <h3>Biologia</h3>
             <img src="biologia.png">
@@ -205,15 +212,14 @@
         }
 
         resultado.innerHTML = `
-            <strong>Estande:</strong> ${encontrado.nome}<br>
-            <strong>Coordenadas:</strong> X=${encontrado.x} | Y=${encontrado.y}
+            <b>Estande:</b> ${encontrado.nome}<br>
+            <b>Coordenadas:</b> X=${encontrado.x} | Y=${encontrado.y}
         `;
     }
 
     function moverPonto() {
         let x = parseInt(document.getElementById("coordX").value);
         let y = parseInt(document.getElementById("coordY").value);
-
         if (isNaN(x) || isNaN(y)) return;
 
         const ponto = document.getElementById("ponto");
@@ -225,3 +231,4 @@
 
 </body>
 </html>
+
