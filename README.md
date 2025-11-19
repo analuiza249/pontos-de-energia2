@@ -30,8 +30,8 @@
 
         /* MAPA — SOMENTE O TAMANHO ALTERADO */
         .mapa {
-            width: 1350px;   /* AUMENTADO */
-            height: 900px;   /* AUMENTADO */
+            width: 1500px;   /* AUMENTADO PARA CABER TUDO */
+            height: 1000px;  /* AUMENTADO PARA AS ESTANDES DE BAIXO */
             background: #ffffff;
             border: 2px solid black;
             border-radius: 10px;
