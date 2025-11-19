@@ -6,7 +6,6 @@
 
 <style>
 
-    /********** LAYOUT GERAL **********/
     body {
         font-family: Arial, sans-serif;
         background: #eef1f5;
@@ -22,7 +21,6 @@
         width: 100%;
     }
 
-    /********** PAINEL LATERAL **********/
     .painel {
         width: 320px;
         background: white;
@@ -86,32 +84,30 @@
         font-size: 14px;
     }
 
-    /********** MAPA **********/
+    /********** MAPA ATUALIZADO **********/
     .mapa {
-        width: 1300px;
-        height: 850px;
+        width: 1350px;   /* AUMENTADO PARA CABER AS ESTANDES */
+        height: 900px;   /* AUMENTADO PARA AS ESTANDES DE BAIXO NÃO SAÍREM */
         background: #ffffff;
         border: 3px solid #000;
         border-radius: 15px;
         position: relative;
 
-        /* REMOVIDO O PROBLEMA QUE CORTAVA AS ESTANDES */
-        overflow: visible;
+        overflow: visible; /* garante que nada fique cortado */
 
         box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
-    /********** ÍCONES **********/
     .inicio {
         width: 18px;
         height: 18px;
         background: #007bff;
         position: absolute;
-        left: 100px;
-        top: 100px;
         transform: translate(-50%, -50%);
         border-radius: 4px;
         z-index: 999;
+        left: 100px;
+        top: 100px;
     }
 
     .inicio-label {
@@ -124,21 +120,16 @@
         color: #004b9b;
     }
 
-    /********** CENTRALIZAÇÃO PERFEITA **********/
     .ponto {
         width: 22px;
         height: 22px;
         background: red;
         border-radius: 50%;
         position: absolute;
-
-        /* SEMPRE centraliza certinho no ponto definido */
         transform: translate(-50%, -50%);
-
         z-index: 900;
     }
 
-    /********** ESTANDES **********/
     .estande {
         position: absolute;
         width: 160px;
@@ -167,7 +158,6 @@
 
 <div class="container">
 
-    <!-- PAINEL -->
     <div class="painel">
         <h2>Consultar Estande</h2>
 
@@ -190,7 +180,6 @@
         <button onclick="moverPonto()">Mover Ponto</button>
     </div>
 
-    <!-- MAPA -->
     <div class="mapa" id="mapa">
 
         <div class="inicio" id="inicio"></div>
@@ -198,7 +187,6 @@
 
         <div class="ponto" id="ponto"></div>
 
-        <!-- ESTANDES COM DADOS IGUAIS -->
         <div class="estande" id="Estande-Biologia" style="left:200px; top:150px;">
             <h3>Biologia</h3>
             <img src="biologia.png">
