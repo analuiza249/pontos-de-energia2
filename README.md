@@ -28,15 +28,10 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* Volta o título para azul */
-        .painel h2 {
-            color: #007bff;
-        }
-
-        /* QUADRADO DO MAPA */
+        /* QUADRADO DO MAPA aumentado */
         .mapa {
-            width: 950px;   /* Aumentado */
-            height: 700px;  /* Aumentado */
+            width: 1000px;   /* aumento do tamanho */
+            height: 750px;   /* aumento do tamanho */
             background: #ffffff;
             border: 2px solid black;
             border-radius: 10px;
