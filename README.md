@@ -28,15 +28,15 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* Aqui mudamos o título do painel para vermelho vinho */
+        /* Volta o título para azul */
         .painel h2 {
-            color: #800000;
+            color: #007bff;
         }
 
         /* QUADRADO DO MAPA */
         .mapa {
-            width: 900px;
-            height: 650px;
+            width: 950px;   /* Aumentado */
+            height: 700px;  /* Aumentado */
             background: #ffffff;
             border: 2px solid black;
             border-radius: 10px;
