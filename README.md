@@ -28,10 +28,10 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* QUADRADO DO MAPA */
+        /* QUADRADO DO MAPA aumentado para a direita */
         .mapa {
-            width: 900px;
-            height: 650px;
+            width: 1200px;   /* aumento lateral */
+            height: 750px;
             background: #ffffff;
             border: 2px solid black;
             border-radius: 10px;
