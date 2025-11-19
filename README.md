@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Mapa da Feira de Ciências</title>
+    <title>Mapa Interativo – Feira de Ciências</title>
 
     <style>
         body {
@@ -28,9 +28,8 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        /* QUADRADO DO MAPA aumentado para a direita */
         .mapa {
-            width: 1200px;   /* aumento lateral */
+            width: 1200px;
             height: 750px;
             background: #ffffff;
             border: 2px solid black;
@@ -39,7 +38,6 @@
             overflow: hidden;
         }
 
-        /* Ícone de início */
         .inicio {
             width: 18px;
             height: 18px;
@@ -59,7 +57,6 @@
             z-index: 999;
         }
 
-        /* Ponto vermelho */
         .ponto {
             width: 22px;
             height: 22px;
@@ -70,7 +67,6 @@
             z-index: 900;
         }
 
-        /* Estandes */
         .estande {
             position: absolute;
             text-align: center;
@@ -154,14 +150,11 @@
     <!-- MAPA -->
     <div class="mapa" id="mapa">
 
-        <!-- Ícone de INÍCIO -->
         <div class="inicio" id="inicio" style="left:100px; top:100px;"></div>
         <div class="inicio-label" id="inicioLabel" style="left:100px; top:100px;">Início</div>
 
-        <!-- PONTO VERMELHO -->
         <div class="ponto" id="ponto" style="left:100px; top:100px;"></div>
 
-        <!-- ESTANDES ORGANIZADAS -->
         <div class="estande" id="Estande-Biologia" style="left:200px; top:150px;">
             <h3>Biologia</h3>
             <img src="biologia.png">
@@ -186,13 +179,10 @@
 </div>
 
 <script>
-
-    // Função para remover acentos automaticamente
     function removerAcentos(texto) {
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-    // Banco de dados simulado
     const pontos = [
         { nome: "Biologia", x: 200, y: 150 },
         { nome: "Química", x: 700, y: 150 },
@@ -200,16 +190,12 @@
         { nome: "Matemática", x: 700, y: 500 }
     ];
 
-    // CONSULTAR (não move mais o ponto)
     function consultar() {
         let nomeDigitado = document.getElementById("nomeConsulta").value.trim();
         let nomeLimpo = removerAcentos(nomeDigitado);
-
         let resultado = document.getElementById("resultado");
 
-        let encontrado = pontos.find(p =>
-            removerAcentos(p.nome) === nomeLimpo
-        );
+        let encontrado = pontos.find(p => removerAcentos(p.nome) === nomeLimpo);
 
         if (!encontrado) {
             resultado.innerHTML = "❌ Estande não encontrada.";
@@ -217,12 +203,11 @@
         }
 
         resultado.innerHTML = `
-            <b>Estande:</b> ${encontrado.nome}<br>
-            <b>Coordenadas:</b> X=${encontrado.x} | Y=${encontrado.y}
+            <strong>Estande:</strong> ${encontrado.nome}<br>
+            <strong>Coordenadas:</strong> X=${encontrado.x} | Y=${encontrado.y}
         `;
     }
 
-    // MOVER PONTO (única forma que move)
     function moverPonto() {
         let x = parseInt(document.getElementById("coordX").value);
         let y = parseInt(document.getElementById("coordY").value);
@@ -233,8 +218,9 @@
         ponto.style.left = x + "px";
         ponto.style.top = y + "px";
     }
-
 </script>
 
 </body>
+</html>
+
 </html>
