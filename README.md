@@ -1,163 +1,131 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Mapa Interativo – Feira de Ciências</title>
+    <meta charset="UTF-8">
+    <title>Mapa Interativo – Feira de Ciências</title>
 
-<style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: #f3f3f3;
+            overflow-x: hidden;
+        }
 
-    body {
-        font-family: Arial, sans-serif;
-        background: #eef1f5;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        gap: 20px;
-    }
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
 
-    .container {
-        display: flex;
-        gap: 20px;
-        width: 100%;
-    }
+        .painel {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-    .painel {
-        width: 320px;
-        background: white;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
+        /* MAPA — SOMENTE O TAMANHO ALTERADO */
+        .mapa {
+            width: 1350px;   /* AUMENTADO */
+            height: 900px;   /* AUMENTADO */
+            background: #ffffff;
+            border: 2px solid black;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .painel h2 {
-        margin-top: 0;
-        font-size: 20px;
-        color: #333;
-        border-left: 4px solid #007bff;
-        padding-left: 10px;
-    }
+        .inicio {
+            width: 18px;
+            height: 18px;
+            background: #007bff;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            border-radius: 3px;
+            z-index: 999;
+        }
 
-    hr {
-        border: none;
-        border-top: 1px solid #ddd;
-        margin: 20px 0;
-    }
+        .inicio-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #004b9b;
+            transform: translate(-50%, -160%);
+            z-index: 999;
+        }
 
-    label {
-        font-weight: bold;
-        margin-top: 10px;
-        display: block;
-        color: #333;
-    }
+        .ponto {
+            width: 22px;
+            height: 22px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            z-index: 900;
+        }
 
-    input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 6px;
-        border: 1px solid #bbb;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 15px;
-    }
+        .estande {
+            position: absolute;
+            text-align: center;
+            width: 150px;
+            transform: translate(-50%, -50%);
+        }
 
-    button {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        color: white;
-        background: #007bff;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 5px;
-    }
+        .estande img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #aaa;
+            border-radius: 10px;
+        }
 
-    button:hover {
-        background: #0056c2;
-    }
+        .estande h3 {
+            margin: 0;
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
 
-    #resultado {
-        margin-top: 15px;
-        padding: 12px;
-        background: #f5f5f5;
-        border-radius: 8px;
-        font-size: 14px;
-    }
+        input, button, label {
+            width: 100%;
+        }
 
-    /********** MAPA ATUALIZADO **********/
-    .mapa {
-        width: 1350px;   /* AUMENTADO PARA CABER AS ESTANDES */
-        height: 900px;   /* AUMENTADO PARA AS ESTANDES DE BAIXO NÃO SAÍREM */
-        background: #ffffff;
-        border: 3px solid #000;
-        border-radius: 15px;
-        position: relative;
+        input {
+            padding: 6px;
+            margin-bottom: 10px;
+        }
 
-        overflow: visible; /* garante que nada fique cortado */
+        button {
+            padding: 10px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
+        button:hover {
+            background: #0056c2;
+        }
 
-    .inicio {
-        width: 18px;
-        height: 18px;
-        background: #007bff;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        border-radius: 4px;
-        z-index: 999;
-        left: 100px;
-        top: 100px;
-    }
-
-    .inicio-label {
-        position: absolute;
-        left: 100px;
-        top: 100px;
-        transform: translate(-50%, -160%);
-        font-weight: bold;
-        font-size: 14px;
-        color: #004b9b;
-    }
-
-    .ponto {
-        width: 22px;
-        height: 22px;
-        background: red;
-        border-radius: 50%;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        z-index: 900;
-    }
-
-    .estande {
-        position: absolute;
-        width: 160px;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-
-    .estande img {
-        width: 160px;
-        height: 160px;
-        object-fit: cover;
-        border-radius: 12px;
-        border: 2px solid #666;
-    }
-
-    .estande h3 {
-        margin: 6px 0;
-        font-size: 17px;
-        color: #222;
-    }
-
-</style>
+        #resultado {
+            margin-top: 10px;
+            padding: 10px;
+            background: #eee;
+            border-radius: 6px;
+        }
+    </style>
 </head>
 
 <body>
-
 <div class="container">
 
+    <!-- PAINEL LATERAL -->
     <div class="painel">
         <h2>Consultar Estande</h2>
 
@@ -180,12 +148,13 @@
         <button onclick="moverPonto()">Mover Ponto</button>
     </div>
 
+    <!-- MAPA -->
     <div class="mapa" id="mapa">
 
-        <div class="inicio" id="inicio"></div>
-        <div class="inicio-label" id="inicioLabel">Início</div>
+        <div class="inicio" id="inicio" style="left:100px; top:100px;"></div>
+        <div class="inicio-label" id="inicioLabel" style="left:100px; top:100px;">Início</div>
 
-        <div class="ponto" id="ponto"></div>
+        <div class="ponto" id="ponto" style="left:100px; top:100px;"></div>
 
         <div class="estande" id="Estande-Biologia" style="left:200px; top:150px;">
             <h3>Biologia</h3>
@@ -212,45 +181,45 @@
 
 <script>
 
-function removerAcentos(texto) {
-    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
-const pontos = [
-    { nome: "Biologia", x: 200, y: 150 },
-    { nome: "Química", x: 700, y: 150 },
-    { nome: "Robótica", x: 200, y: 500 },
-    { nome: "Matemática", x: 700, y: 500 }
-];
-
-function consultar() {
-    let nomeDigitado = document.getElementById("nomeConsulta").value.trim();
-    let nomeLimpo = removerAcentos(nomeDigitado);
-    let resultado = document.getElementById("resultado");
-
-    let encontrado = pontos.find(p => removerAcentos(p.nome) === nomeLimpo);
-
-    if (!encontrado) {
-        resultado.innerHTML = "❌ Estande não encontrada.";
-        return;
+    function removerAcentos(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-    resultado.innerHTML = `
-        <strong>Estande:</strong> ${encontrado.nome}<br>
-        <strong>Coordenadas:</strong> X=${encontrado.x} | Y=${encontrado.y}
-    `;
-}
+    const pontos = [
+        { nome: "Biologia", x: 200, y: 150 },
+        { nome: "Química", x: 700, y: 150 },
+        { nome: "Robótica", x: 200, y: 500 },
+        { nome: "Matemática", x: 700, y: 500 }
+    ];
 
-function moverPonto() {
-    let x = parseInt(document.getElementById("coordX").value);
-    let y = parseInt(document.getElementById("coordY").value);
+    function consultar() {
+        let nomeDigitado = document.getElementById("nomeConsulta").value.trim();
+        let nomeLimpo = removerAcentos(nomeDigitado);
+        let resultado = document.getElementById("resultado");
 
-    if (isNaN(x) || isNaN(y)) return;
+        let encontrado = pontos.find(p => removerAcentos(p.nome) === nomeLimpo);
 
-    const ponto = document.getElementById("ponto");
-    ponto.style.left = x + "px";
-    ponto.style.top = y + "px";
-}
+        if (!encontrado) {
+            resultado.innerHTML = "❌ Estande não encontrada.";
+            return;
+        }
+
+        resultado.innerHTML = `
+            <strong>Estande:</strong> ${encontrado.nome}<br>
+            <strong>Coordenadas:</strong> X=${encontrado.x} | Y=${encontrado.y}
+        `;
+    }
+
+    function moverPonto() {
+        let x = parseInt(document.getElementById("coordX").value);
+        let y = parseInt(document.getElementById("coordY").value);
+
+        if (isNaN(x) || isNaN(y)) return;
+
+        const ponto = document.getElementById("ponto");
+        ponto.style.left = x + "px";
+        ponto.style.top = y + "px";
+    }
 
 </script>
 
